@@ -22,10 +22,17 @@ namespace flutter {
 
 class FrameTiming {
  public:
-  enum Phase { kBuildStart, kBuildFinish, kRasterStart, kRasterFinish, kCount };
+  enum Phase {
+    kVsyncStart,
+    kBuildStart,
+    kBuildFinish,
+    kRasterStart,
+    kRasterFinish,
+    kCount
+  };
 
-  static constexpr Phase kPhases[kCount] = {kBuildStart, kBuildFinish,
-                                            kRasterStart, kRasterFinish};
+  static constexpr Phase kPhases[kCount] = {
+      kVsyncStart, kBuildStart, kBuildFinish, kRasterStart, kRasterFinish};
 
   fml::TimePoint Get(Phase phase) const { return data_[phase]; }
   fml::TimePoint Set(Phase phase, fml::TimePoint value) {
@@ -97,6 +104,7 @@ struct Settings {
   bool trace_systrace = false;
   bool dump_skp_on_shader_compilation = false;
   bool cache_sksl = false;
+  bool purge_persistent_cache = false;
   bool endless_trace_buffer = false;
   bool enable_dart_profiling = false;
   bool disable_dart_asserts = false;
